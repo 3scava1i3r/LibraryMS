@@ -28,7 +28,7 @@ export default function Navbar() {
                 )}
                 {user.role === 'member' && (
                   <div className="flex gap-3 text-sm">
-                    <Link to="/" className="hover:text-indigo-200">Browse</Link>
+                    <Link to="/browse" className="hover:text-indigo-200">Browse</Link>
                     <Link to="/my-books" className="hover:text-indigo-200">My Books</Link>
                   </div>
                 )}

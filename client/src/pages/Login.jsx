@@ -12,7 +12,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const user = await login(form.email, form.password);
-      navigate(user.role === 'admin' ? '/admin' : '/');
+      navigate(user.role === 'admin' ? '/admin' : '/browse');
     } catch {
       setError('Invalid email or password');
     }
