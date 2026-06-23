@@ -35,13 +35,13 @@ export default function BookDetail() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <button onClick={() => navigate(-1)} className="text-indigo-600 hover:underline mb-4 block">&larr; Back</button>
+      <button onClick={() => navigate(-1)} className="text-[#0000FF] hover:underline mb-4 block">&larr; Back</button>
       <div className="bg-white rounded-xl shadow-md p-8">
         <div className="text-5xl mb-4">📖</div>
         <h1 className="text-3xl font-bold mb-2">{book.title}</h1>
         <p className="text-gray-500 text-lg mb-4">by {book.author}</p>
         <div className="flex gap-2 mb-6">
-          <span className="text-xs bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">{book.category}</span>
+          <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">{book.category}</span>
           {book.isbn && <span className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">ISBN: {book.isbn}</span>}
         </div>
         <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
@@ -60,7 +60,7 @@ export default function BookDetail() {
           </div>
         )}
         <button onClick={handleBorrow} disabled={book.available < 1}
-          className={`w-full py-3 rounded-lg font-medium transition ${book.available > 0 ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}>
+          className={`w-full py-3 rounded-lg font-medium transition ${book.available > 0 ? 'bg-[#0000FF] text-white hover:bg-[#0000DD]' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}>
           {book.available > 0 ? 'Borrow This Book' : 'Unavailable'}
         </button>
       </div>

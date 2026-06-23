@@ -47,7 +47,7 @@ export default function Transactions() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Transactions</h1>
-        <button onClick={() => setShowIssue(true)} className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700">
+        <button onClick={() => setShowIssue(true)} className="bg-[#0000FF] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#0000DD]">
           + Issue Book
         </button>
       </div>
@@ -61,9 +61,9 @@ export default function Transactions() {
 
       <div className="flex gap-4 mb-4">
         <input type="text" placeholder="Search by user or book..." value={search} onChange={e => setSearch(e.target.value)}
-          className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#0000FF]" />
         <select value={filter} onChange={e => setFilter(e.target.value)}
-          className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#0000FF]">
           <option value="">All</option>
           <option value="borrowed">Borrowed</option>
           <option value="returned">Returned</option>
@@ -112,11 +112,11 @@ export default function Transactions() {
             <h2 className="text-xl font-bold mb-4">Issue Book</h2>
             <form onSubmit={handleIssue} className="space-y-3">
               <input type="number" placeholder="User ID" required value={issueForm.user_id} onChange={e => setIssueForm({ ...issueForm, user_id: e.target.value })}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#0000FF]" />
               <input type="number" placeholder="Book ID" required value={issueForm.book_id} onChange={e => setIssueForm({ ...issueForm, book_id: e.target.value })}
-                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#0000FF]" />
               <div className="flex gap-3 pt-2">
-                <button type="submit" className="flex-1 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">Issue</button>
+                <button type="submit" className="flex-1 bg-[#0000FF] text-white py-2 rounded-lg hover:bg-[#0000DD]">Issue</button>
                 <button type="button" onClick={() => { setShowIssue(false); setMessage(''); }} className="flex-1 bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300">Cancel</button>
               </div>
             </form>

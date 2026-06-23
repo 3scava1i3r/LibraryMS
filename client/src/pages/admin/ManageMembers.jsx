@@ -25,7 +25,7 @@ export default function ManageMembers() {
     <div>
       <h1 className="text-2xl font-bold mb-6">Manage Members</h1>
       <input type="text" placeholder="Search members..." value={search} onChange={e => setSearch(e.target.value)}
-        className="w-full border rounded-lg px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        className="w-full border rounded-lg px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-[#0000FF]" />
       <div className="bg-white rounded-xl shadow-md overflow-hidden">
         <table className="w-full text-sm">
           <thead className="bg-gray-50 text-gray-600">

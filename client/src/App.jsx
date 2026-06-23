@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import { ProtectedRoute, AdminRoute } from './components/ProtectedRoute';
 import Landing from './pages/Landing';
@@ -13,9 +13,12 @@ import ManageMembers from './pages/admin/ManageMembers';
 import Transactions from './pages/admin/Transactions';
 
 export default function App() {
+  const location = useLocation();
+  const isLanding = location.pathname === '/';
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
+      {!isLanding && <Navbar />}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />

@@ -25,9 +25,9 @@ export default function BrowseBooks() {
       <div className="flex gap-4 mb-6">
         <input type="text" placeholder="Search by title or author..." value={search}
           onChange={e => setSearch(e.target.value)}
-          className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#0000FF]" />
         <select value={category} onChange={e => setCategory(e.target.value)}
-          className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#0000FF]">
           <option value="">All Categories</option>
           {categories.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
@@ -39,7 +39,7 @@ export default function BrowseBooks() {
             <div className="text-3xl mb-3">📖</div>
             <h3 className="font-semibold text-gray-800 mb-1 line-clamp-2">{book.title}</h3>
             <p className="text-sm text-gray-500 mb-2">{book.author}</p>
-            <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded">{book.category}</span>
+            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">{book.category}</span>
             <p className="text-sm mt-3">
               <span className={book.available > 0 ? 'text-green-600 font-medium' : 'text-red-600 font-medium'}>
                 {book.available > 0 ? `${book.available} available` : 'Unavailable'}
