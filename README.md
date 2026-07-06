@@ -2,6 +2,8 @@
 
 A brutalist Library Management System built with React/Vite frontend and Node.js backend, styled using the RawBlock Design System.
 
+> **🏆 Grand Prize Winner - Hackofiesta Hackathon**
+
 ## Overview
 
 LibraryMS is a modern library management application with an unapologetically raw, anti-design aesthetic. Built for experimental portfolios and avant-garde art sites, it embraces thick borders, system-level aesthetics, and the raw power of black-on-white.
