@@ -16,7 +16,7 @@ export async function initDB() {
   } else {
     db = new SQL.Database();
   }
-  db.run('PRAGMA journal_mode=WAL');
+  db.run('PRAGMA journal_mode=MEMORY');
   return db;
 }
 

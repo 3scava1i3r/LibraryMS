@@ -15,14 +15,24 @@ export function AuthProvider({ children }) {
       api.get('/auth/me').then((res) => {
         setUser(res.data);
         localStorage.setItem('user', JSON.stringify(res.data));
-      }).catch(() => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        setUser(null);
+      }).catch((err) => {
+        if (err.response?.status === 401) {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          setUser(null);
+        }
       }).finally(() => setLoading(false));
     } else {
       setLoading(false);
     }
+
+    const handleUnauthorized = () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      setUser(null);
+    };
+    window.addEventListener('auth:unauthorized', handleUnauthorized);
+    return () => window.removeEventListener('auth:unauthorized', handleUnauthorized);
   }, []);
 
   const login = async (email, password) => {

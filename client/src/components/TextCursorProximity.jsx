@@ -1,5 +1,5 @@
 import { forwardRef, useRef } from 'react';
-import { motion, useAnimationFrame, useMotionValue, useTransform } from 'motion/react';
+import { motion, useAnimationFrame, motionValue, useTransform } from 'motion/react';
 import { useMousePositionRef } from '../hooks/use-mouse-position-ref';
 
 const MotionLetter = forwardRef(({ letter, proximity, styles }, ref) => {
@@ -26,8 +26,8 @@ const TextCursorProximity = forwardRef(
     const numLetters = letters.length;
 
     const letterProximities = useRef([]);
-    if (letterProximities.current.length === 0) {
-      letterProximities.current = Array.from({ length: numLetters }, () => useMotionValue(0));
+    if (letterProximities.current.length !== numLetters) {
+      letterProximities.current = Array.from({ length: numLetters }, () => motionValue(0));
     }
 
     const calculateDistance = (x1, y1, x2, y2) =>

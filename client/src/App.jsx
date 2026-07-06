@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import { ProtectedRoute, AdminRoute } from './components/ProtectedRoute';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
@@ -15,11 +16,15 @@ import Transactions from './pages/admin/Transactions';
 export default function App() {
   const location = useLocation();
   const isLanding = location.pathname === '/';
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+  const showNavbar = !isLanding && !isAuthPage;
+  const showFooter = !isLanding;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {!isLanding && <Navbar />}
-      <Routes>
+    <div className="min-h-screen flex flex-col bg-white text-black">
+      {showNavbar && <Navbar />}
+      <main className="flex-1">
+        <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -30,7 +35,9 @@ export default function App() {
         <Route path="/admin/books" element={<AdminRoute><div className="max-w-7xl mx-auto px-4 py-6"><ManageBooks /></div></AdminRoute>} />
         <Route path="/admin/members" element={<AdminRoute><div className="max-w-7xl mx-auto px-4 py-6"><ManageMembers /></div></AdminRoute>} />
         <Route path="/admin/transactions" element={<AdminRoute><div className="max-w-7xl mx-auto px-4 py-6"><Transactions /></div></AdminRoute>} />
-      </Routes>
+        </Routes>
+      </main>
+      {showFooter && <Footer />}
     </div>
   );
 }

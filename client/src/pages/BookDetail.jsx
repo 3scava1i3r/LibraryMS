@@ -30,37 +30,42 @@ export default function BookDetail() {
     }
   };
 
-  if (loading) return <div className="text-center py-20 text-gray-500">Loading...</div>;
+  if (loading) return <div className="text-center py-20 text-gray-500 font-mono">Loading...</div>;
   if (!book) return null;
 
   return (
     <div className="max-w-2xl mx-auto">
-      <button onClick={() => navigate(-1)} className="text-[#0000FF] hover:underline mb-4 block">&larr; Back</button>
-      <div className="bg-white rounded-xl shadow-md p-8">
-        <div className="text-5xl mb-4">📖</div>
-        <h1 className="text-3xl font-bold mb-2">{book.title}</h1>
-        <p className="text-gray-500 text-lg mb-4">by {book.author}</p>
+      <button onClick={() => navigate('/browse')} className="text-gray-500 hover:text-black mb-4 block font-mono">&larr; Back to Browse</button>
+      <div className="bg-white border-[3px] border-black p-8">
+        <div className="mb-4">
+          <h1 className="font-raw text-4xl uppercase tracking-wider">{book.title}</h1>
+        </div>
+        <p className="text-gray-500 text-lg mb-4 font-mono">by {book.author}</p>
         <div className="flex gap-2 mb-6">
-          <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">{book.category}</span>
-          {book.isbn && <span className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">ISBN: {book.isbn}</span>}
+          <span className="text-xs font-mono uppercase tracking-wider border-[2px] border-black px-3 py-1">{book.category}</span>
+          {book.isbn && <span className="text-xs font-mono border-[2px] border-black px-3 py-1">ISBN: {book.isbn}</span>}
         </div>
         <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
-          <div className="bg-gray-50 p-3 rounded-lg">
-            <span className="text-gray-500">Total Copies</span>
-            <p className="text-xl font-bold">{book.quantity}</p>
+          <div className="border-[3px] border-black p-3">
+            <span className="text-gray-500 font-mono uppercase tracking-wider text-xs">Total Copies</span>
+            <p className="text-xl font-raw text-black">{book.quantity}</p>
           </div>
-          <div className="bg-gray-50 p-3 rounded-lg">
-            <span className="text-gray-500">Available</span>
-            <p className={`text-xl font-bold ${book.available > 0 ? 'text-green-600' : 'text-red-600'}`}>{book.available}</p>
+          <div className="border-[3px] border-black p-3">
+            <span className="text-gray-500 font-mono uppercase tracking-wider text-xs">Available</span>
+            <p className={`text-xl font-raw ${book.available > 0 ? 'text-[#008000]' : 'text-[#FF0000]'}`}>{book.available}</p>
           </div>
         </div>
         {message && (
-          <div className={`p-3 rounded-lg mb-4 text-sm ${message.includes('successfully') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+          <div className={`p-3 mb-4 text-sm border-[3px] font-mono ${message.includes('successfully') ? 'border-[#008000] text-[#008000]' : 'border-[#FF0000] text-[#FF0000]'}`}>
             {message}
           </div>
         )}
         <button onClick={handleBorrow} disabled={book.available < 1}
-          className={`w-full py-3 rounded-lg font-medium transition ${book.available > 0 ? 'bg-[#0000FF] text-white hover:bg-[#0000DD]' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}>
+          className={`w-full py-3 font-mono text-sm uppercase tracking-widest border-[3px] ${
+            book.available > 0
+              ? 'bg-black text-white border-black hover:bg-white hover:text-black'
+              : 'bg-white text-gray-400 border-gray-400 cursor-not-allowed'
+          }`}>
           {book.available > 0 ? 'Borrow This Book' : 'Unavailable'}
         </button>
       </div>

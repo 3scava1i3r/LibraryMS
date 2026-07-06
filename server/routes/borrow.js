@@ -5,20 +5,28 @@ import { authenticate, adminOnly } from '../middleware/auth.js';
 const router = Router();
 
 router.post('/', authenticate, (req, res) => {
-  const { book_id } = req.body;
+  const { book_id, user_id } = req.body;
   if (!book_id) return res.status(400).json({ error: 'Book ID required' });
+
+  const borrowerId = (req.user.role === 'admin' && user_id) ? parseInt(user_id) : req.user.id;
+
+  if (req.user.role === 'admin' && user_id) {
+    const targetUser = get("SELECT id, role FROM users WHERE id = ?", [borrowerId]);
+    if (!targetUser) return res.status(404).json({ error: 'User not found' });
+    if (targetUser.role !== 'member') return res.status(400).json({ error: 'Can only issue books to members' });
+  }
 
   const book = get("SELECT * FROM books WHERE id = ?", [book_id]);
   if (!book) return res.status(404).json({ error: 'Book not found' });
   if (book.available < 1) return res.status(400).json({ error: 'No copies available' });
 
-  const activeBorrow = get("SELECT id FROM borrow_records WHERE user_id = ? AND book_id = ? AND status = 'borrowed'", [req.user.id, book_id]);
-  if (activeBorrow) return res.status(400).json({ error: 'You already have this book borrowed' });
+  const activeBorrow = get("SELECT id FROM borrow_records WHERE user_id = ? AND book_id = ? AND status = 'borrowed'", [borrowerId, book_id]);
+  if (activeBorrow) return res.status(400).json({ error: 'User already has this book borrowed' });
 
   const dueDate = new Date();
   dueDate.setDate(dueDate.getDate() + 14);
 
-  run("INSERT INTO borrow_records (user_id, book_id, due_date, status) VALUES (?, ?, ?, 'borrowed')", [req.user.id, book_id, dueDate.toISOString()]);
+  run("INSERT INTO borrow_records (user_id, book_id, due_date, status) VALUES (?, ?, ?, 'borrowed')", [borrowerId, book_id, dueDate.toISOString()]);
   run("UPDATE books SET available = available - 1 WHERE id = ?", [book_id]);
   const record = get("SELECT * FROM borrow_records ORDER BY id DESC LIMIT 1");
   res.status(201).json(record);

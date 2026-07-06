@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import bcrypt from 'bcryptjs';
 import { get, all, run } from '../db.js';
 import { authenticate, adminOnly } from '../middleware/auth.js';
 
@@ -20,9 +21,28 @@ router.get('/:id', authenticate, (req, res) => {
   res.json(user);
 });
 
-router.post('/', authenticate, adminOnly, (req, res) => {
-  // Admin creates a member
-  res.status(501).json({ error: 'Use register endpoint for now' });
+router.post('/', authenticate, adminOnly, async (req, res) => {
+  try {
+    const { name, email, password, phone } = req.body;
+    if (!name || !email || !password) return res.status(400).json({ error: 'Name, email and password required' });
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) return res.status(400).json({ error: 'Invalid email format' });
+
+    if (password.length < 8) return res.status(400).json({ error: 'Password must be at least 8 characters' });
+
+    const existing = get("SELECT id FROM users WHERE email = ?", [email]);
+    if (existing) return res.status(409).json({ error: 'Email already registered' });
+
+    const hash = await bcrypt.hash(password, 10);
+    run("INSERT INTO users (name, email, password, role, phone) VALUES (?, ?, ?, 'member', ?)", [name, email, hash, phone || '']);
+    const user = get("SELECT id, name, email, role, phone, created_at FROM users WHERE email = ?", [email]);
+    if (!user) return res.status(500).json({ error: 'Failed to create user' });
+    res.status(201).json(user);
+  } catch (err) {
+    console.error('Create user error:', err);
+    res.status(500).json({ error: 'Failed to create user' });
+  }
 });
 
 router.put('/:id', authenticate, adminOnly, (req, res) => {

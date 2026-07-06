@@ -4,9 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library Management System</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              raw: ['Archivo Black', 'sans-serif'],
+              body: ['Work Sans', 'sans-serif'],
+              mono: ['Space Mono', 'monospace'],
+            },
+          },
+        },
+      }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body { font-family: 'Work Sans', ui-sans-serif, system-ui, sans-serif; }
+      h1, h2, h3, h4, h5, h6, .font-raw { font-family: 'Archivo Black', sans-serif; letter-spacing: 0.02em; }
+      input, textarea, select, code, pre, .font-mono { font-family: 'Space Mono', monospace; }
+      * { border-radius: 0 !important; box-shadow: none !important; }
+    </style>
   </head>
-  <body class="bg-gray-50">
+  <body class="bg-white">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

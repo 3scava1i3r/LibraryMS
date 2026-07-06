@@ -36,6 +36,9 @@ async function seed() {
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (book_id) REFERENCES books(id)
   )`);
+  run("CREATE INDEX IF NOT EXISTS idx_borrow_user ON borrow_records(user_id)");
+  run("CREATE INDEX IF NOT EXISTS idx_borrow_book ON borrow_records(book_id)");
+  run("CREATE INDEX IF NOT EXISTS idx_borrow_status ON borrow_records(status)");
 
   const existingAdmin = run("SELECT id FROM users WHERE email = ?", ["admin@library.com"]);
   if (existingAdmin.length === 0) {
