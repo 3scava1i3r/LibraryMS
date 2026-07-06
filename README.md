@@ -119,6 +119,20 @@ This project uses the RawBlock Design System - a brutalist design language featu
 
 See [DESIGN.md](./DESIGN.md) for complete design system documentation.
 
+## Case Study
+
+### Hackofiesta Hackathon
+
+LibraryMS was developed as part of the Hackofiesta hackathon and won the **Grand Prize** for its innovative brutalist design approach and clean architectural implementation. The project demonstrates:
+
+- Real-time database integration for library operations
+- Responsive brutalist UI/UX using RawBlock Design System
+- Complete user authentication flow
+- Role-based access control (user vs admin)
+- Motion animations for enhanced interactions
+
+![LibraryMS Demo](./server/librarycms-demo.mp4)
+
 ## License
 
 MIT
